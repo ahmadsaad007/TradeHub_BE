@@ -1,6 +1,9 @@
-package org.saad.tradehub_be.entity.itemcard;
+package org.saad.tradehub_be.entity.data;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * The Image class represents an image associated with an item or service in the TradeHub platform.
@@ -13,9 +16,6 @@ import lombok.*;
 @Builder
 public class Image {
 
-    /**
-     * URL of the image that points to the location where the image is stored.
-     */
     private String url;
 
     /**
@@ -23,14 +23,8 @@ public class Image {
      */
     private String format;
 
-    /**
-     * The width of the image
-     */
     private int width;
 
-    /**
-     * The height of the image
-     */
     private int height;
 
     /**

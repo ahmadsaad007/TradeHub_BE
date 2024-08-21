@@ -1,7 +1,9 @@
-package org.saad.tradehub_be.entity.itemcard;
+package org.saad.tradehub_be.entity.data;
 
-import lombok.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * The Category class represents the category under which an item or service can be listed.
