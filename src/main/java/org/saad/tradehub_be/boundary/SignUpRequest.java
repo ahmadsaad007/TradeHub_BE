@@ -1,6 +1,8 @@
 package org.saad.tradehub_be.boundary;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * The SignUpRequestDTO class represents the SignUp Data sent to the BE as part of the
@@ -9,7 +11,9 @@ import lombok.Data;
  * I named it DTO cause essentially it is transferring Data from FE to BE. Naming is symbolic
  */
 @Data
-public class SignUpRequestDTO {
+@NoArgsConstructor
+@AllArgsConstructor
+public class SignUpRequest {
     protected String username;
     protected String password;
     protected String email;

@@ -5,12 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LoginRequestDTO {
-    private String username;
-    private String password;
+public class Message {
+    private String itemId;
+    private String messageText;
+    private String sender;
+    private String receiver;
+    private Date timeStamp;
 }
