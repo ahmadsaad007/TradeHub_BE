@@ -1,4 +1,4 @@
-package org.saad.tradehub_be.boundary;
+package org.saad.tradehub_be.boundary.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,8 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ListingUpdateForm {
-    private String listingId;
+public class UpdateListingForm {
     private String name;
     private String description;
     private double price;

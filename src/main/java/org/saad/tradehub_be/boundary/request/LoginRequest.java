@@ -1,7 +1,6 @@
-package org.saad.tradehub_be.boundary;
+package org.saad.tradehub_be.boundary.request;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
