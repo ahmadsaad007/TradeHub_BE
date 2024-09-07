@@ -1,6 +1,8 @@
 package org.saad.tradehub_be.entity.data.actors;
 
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.saad.tradehub_be.entity.data.ItemListing;
@@ -16,19 +18,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @SuperBuilder
+@Entity
+@EqualsAndHashCode(callSuper = false)
 public class Seller extends User {
 
+    @OneToMany(mappedBy = "sellerInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ItemListing> listings;
-
-    public void addListing(ItemListing itemListing) {
-        listings.add(itemListing);
-    }
-
-    public void removeListing(String listingId) {
-        listings.removeIf(listing -> listing.getListingId().equals(listingId));
-    }
-
-    public List<ItemListing> getListings() {
-        return new ArrayList<>(listings); // Returning a copy to avoid modification outside
-    }
 }

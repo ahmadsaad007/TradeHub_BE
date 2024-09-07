@@ -1,4 +1,4 @@
-package org.saad.tradehub_be.boundary.util;
+package org.saad.tradehub_be.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;

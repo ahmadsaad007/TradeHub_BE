@@ -1,6 +1,6 @@
 package org.saad.tradehub_be.boundary.controller;
 
-import org.saad.tradehub_be.boundary.util.ObjectMapperUtil;
+import org.saad.tradehub_be.util.ObjectMapperUtil;
 import org.saad.tradehub_be.boundary.request.Message;
 import org.saad.tradehub_be.boundary.request.UserProfileUpdate;
 import org.saad.tradehub_be.services.UserControlService;

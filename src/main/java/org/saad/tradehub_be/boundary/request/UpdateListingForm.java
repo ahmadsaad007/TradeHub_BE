@@ -8,6 +8,12 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The UpdateListingForm class represents the use case for Updating existing ItemListing on TradeHub platform
+ * <p>
+ * Use Case: Update Listing
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

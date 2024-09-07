@@ -1,5 +1,6 @@
 package org.saad.tradehub_be.entity.data.actors;
 
+import jakarta.persistence.Entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -15,13 +16,8 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 @SuperBuilder
+@Entity
 public class Buyer extends User {
 
-    private List<ItemListing> orderHistory;
-
-    public List<ItemListing> getOrderInfo(String listingId) {
-        return orderHistory.stream()
-                .filter(itemListing -> itemListing.getListingId().equals(listingId))
-                .collect(Collectors.toList());
-    }
+    private List<String> purchasedItemIds;
 }

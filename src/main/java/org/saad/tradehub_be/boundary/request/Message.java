@@ -7,6 +7,13 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+/**
+ * The Message class represents the Message Interaction between buyer and seller
+ * regarding a particular itemId
+ * <p>
+ * UseCase: Buyer messages Seller and vice versa
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

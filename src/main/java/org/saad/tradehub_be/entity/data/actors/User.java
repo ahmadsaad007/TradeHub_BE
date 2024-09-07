@@ -1,28 +1,30 @@
 package org.saad.tradehub_be.entity.data.actors;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.experimental.SuperBuilder;
 
 
 /**
  * The User class serves as an abstract base class for different types of users.
  * Both Buyers and Sellers have common attributes such as username, email, and phone number, which are defined here.
  */
-@Entity
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
+@Entity
+@Table(name = "app_users")
 public class User {
 
+    @Column(unique = true, nullable = false)
     protected String username;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected String userId;
 
     protected String password;

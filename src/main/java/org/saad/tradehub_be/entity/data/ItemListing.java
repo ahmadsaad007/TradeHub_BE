@@ -1,5 +1,6 @@
 package org.saad.tradehub_be.entity.data;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.saad.tradehub_be.entity.data.actors.Seller;
 import org.springframework.util.StringUtils;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,13 +19,16 @@ import java.util.List;
  * images, and category.
  */
 
+@Entity
+@Table(name = "item_listings")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class ItemListing {
 
-    private String listingId;
+    @Id
+    private String itemId;
 
     private String name;
 
@@ -31,39 +36,44 @@ public class ItemListing {
 
     private double price;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", nullable = false)
     private Seller sellerInfo;
 
-    private List<Image> images;
+    private List<String> imageUrls;
 
     private String listingAddress;
 
     private String zip;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoryId", nullable = false)
     private Category category;
 
     private boolean isAvailable;
 
+    private Date createdAt;
+
     public String getDetails() {
         StringBuilder details = new StringBuilder();
-        details.append("Item ID: ").append(listingId).append("\n");
+        details.append("Item ID: ").append(itemId).append("\n");
         details.append("Name: ").append(name).append("\n");
         details.append("Description: ").append(description).append("\n");
         details.append("Price: $").append(price).append("\n");
         details.append("Seller: ").append(sellerInfo.getUsername()).append("\n");
-        details.append("Category: ").append(category.getName()).append("\n");
         details.append("Address: ").append(listingAddress).append(", ZIP: ").append(zip).append("\n");
 
-        if (images != null && !images.isEmpty()) {
+        if (imageUrls != null && !imageUrls.isEmpty()) {
             details.append("Images:\n");
-            for (Image image : images) {
-                details.append(" - ").append(image.getUrl()).append("\n");
+            for (String image : imageUrls) {
+                details.append(" - ").append(image).append("\n");
             }
         }
 
         return details.toString();
     }
 
-    public void updateDetails(String newName, String newDescription, double newPrice, Category newCategory, String newAddress, String newZip) {
+    public void updateDetails(String newName, String newDescription, double newPrice, String newCategory, String newAddress, String newZip) {
         if (newName != null && !newName.isEmpty()) {
             this.name = newName;
         }
@@ -72,9 +82,6 @@ public class ItemListing {
         }
         if (newPrice > 0) {
             this.price = newPrice;
-        }
-        if (newCategory != null) {
-            this.category = newCategory;
         }
         if (newAddress != null && !newAddress.isEmpty()) {
             this.listingAddress = newAddress;

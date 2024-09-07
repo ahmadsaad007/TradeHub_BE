@@ -7,12 +7,18 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+/**
+ * The ReportListingForm class represents the use case for Reporting a ItemListing for
+ * going against standards and policies or for being incorrectly listed
+ * <p>
+ * Use Case: Report Listing
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class ReportListingForm {
-    private String iid;
+    private String itemId;
     private String sellerId;
     private String buyerReportedBy;
     private Date timeReported;

@@ -1,5 +1,6 @@
-package org.saad.tradehub_be.entity.data.actors;
+package org.saad.tradehub_be.repository;
 
+import org.saad.tradehub_be.entity.data.actors.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -7,5 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface UserRepository extends JpaRepository<User, String> {
     User findByUsername(String username);
-    boolean existsByUsername(String username);
+
+    User findByUserId(String userId);
 }

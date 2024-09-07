@@ -8,6 +8,12 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The NewListingForm class represents the use case for Creating a new ItemListing on TradeHub platform
+ * <p>
+ * Use Case: Create a new Listing
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

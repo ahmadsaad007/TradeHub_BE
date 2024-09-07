@@ -1,5 +1,7 @@
 package org.saad.tradehub_be.entity.data;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +16,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
 public class Category {
+    @Id
     private String categoryId;
     private String name;
     private String description;

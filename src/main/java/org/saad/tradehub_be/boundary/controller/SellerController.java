@@ -1,14 +1,17 @@
 package org.saad.tradehub_be.boundary.controller;
 
-import org.saad.tradehub_be.boundary.util.ObjectMapperUtil;
+import org.saad.tradehub_be.entity.data.ItemListing;
+import org.saad.tradehub_be.services.SellerService;
+import org.saad.tradehub_be.util.ObjectMapperUtil;
 import org.saad.tradehub_be.boundary.request.NewListingForm;
 import org.saad.tradehub_be.boundary.request.UpdateListingForm;
-import org.saad.tradehub_be.services.SellerControlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/seller")
@@ -18,13 +21,13 @@ public class SellerController {
     private ObjectMapperUtil objectMapperUtil;
 
     @Autowired
-    private SellerControlService sellerControlService;
+    private SellerService sellerService;
 
     @PostMapping("/create-item")
     public ResponseEntity<HttpStatus> createListing(@RequestBody String requestBody) {
         try {
             NewListingForm newListingForm = objectMapperUtil.mapRequestBody(requestBody, NewListingForm.class);
-            sellerControlService.createNewListing(newListingForm);
+            sellerService.createListing(newListingForm);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -36,10 +39,25 @@ public class SellerController {
                                                     @PathVariable String itemId) {
         try {
             UpdateListingForm updateListingForm = objectMapperUtil.mapRequestBody(requestBody, UpdateListingForm.class);
-            sellerControlService.updateListing(itemId, updateListingForm);
+            sellerService.updateExistingListing(itemId, updateListingForm);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @PostMapping("/delete-item/{itemId}")
+    public ResponseEntity<HttpStatus> deleteListing(@PathVariable String itemId) {
+        try {
+            sellerService.deleteListing(itemId);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/get-listings/{username}")
+    public List<ItemListing> getAvailableListings(@PathVariable String username) {
+        return sellerService.findItemListingBySellerInfo(username);
     }
 }
