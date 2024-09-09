@@ -72,22 +72,4 @@ public class ItemListing {
 
         return details.toString();
     }
-
-    public void updateDetails(String newName, String newDescription, double newPrice, String newCategory, String newAddress, String newZip) {
-        if (newName != null && !newName.isEmpty()) {
-            this.name = newName;
-        }
-        if (newDescription != null && !newDescription.isEmpty()) {
-            this.description = newDescription;
-        }
-        if (newPrice > 0) {
-            this.price = newPrice;
-        }
-        if (newAddress != null && !newAddress.isEmpty()) {
-            this.listingAddress = newAddress;
-        }
-        if (StringUtils.hasLength(newZip)) {
-            this.zip = newZip;
-        }
-    }
 }

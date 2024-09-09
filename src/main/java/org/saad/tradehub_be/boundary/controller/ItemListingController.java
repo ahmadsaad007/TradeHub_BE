@@ -6,6 +6,7 @@ import org.saad.tradehub_be.util.ObjectMapperUtil;
 import org.saad.tradehub_be.entity.data.ItemListing;
 import org.saad.tradehub_be.services.ItemListingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,8 +31,9 @@ public class ItemListingController {
     }
 
     @PostMapping("/report/{itemId}")
-    public void reportItemListing(@PathVariable String itemId, @RequestBody String report) throws Exception {
+    public ResponseEntity<String> reportItemListing(@PathVariable String itemId, @RequestBody String report) throws Exception {
         ReportListingForm reportListingForm = objectMapperUtil.mapRequestBody(report, ReportListingForm.class);
         reportingService.reportListing(itemId, reportListingForm);
+        return ResponseEntity.ok("Item Reported Successfully");
     }
 }

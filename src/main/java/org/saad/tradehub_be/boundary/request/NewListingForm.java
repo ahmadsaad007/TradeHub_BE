@@ -26,7 +26,7 @@ public class NewListingForm {
     private String sellerUsername;
     private List<String> imageUrls;
     private String listingAddress;
-    private long zip;
+    private String zip;
     private String categoryName;
     private Date createdAt;
 }

@@ -4,6 +4,9 @@ import org.saad.tradehub_be.entity.data.actors.Buyer;
 import org.saad.tradehub_be.repository.BuyerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class BuyerService {
 
@@ -13,12 +16,21 @@ public class BuyerService {
         this.buyerRepository = buyerRepository;
     }
 
-    public void addPurchasedItem(String buyerId, String itemId) {
-        Buyer buyer = buyerRepository.findById(buyerId)
+    public void addPurchaseOrder(String userId, String itemId) {
+        Buyer buyer = buyerRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Buyer not found"));
 
-        buyer.getPurchasedItemIds().add(itemId);
-        buyerRepository.save(buyer);
-    }
+        List<String> purchasedItemIds = buyer.getPurchasedItemIds();
+        if (purchasedItemIds == null) {
+            purchasedItemIds = new ArrayList<>();
+        }
 
+        if (!purchasedItemIds.contains(itemId)) {
+            purchasedItemIds.add(itemId);
+            buyer.setPurchasedItemIds(purchasedItemIds);
+            buyerRepository.save(buyer);
+        } else {
+            throw new RuntimeException("Item is already in the purchase history.");
+        }
+    }
 }
