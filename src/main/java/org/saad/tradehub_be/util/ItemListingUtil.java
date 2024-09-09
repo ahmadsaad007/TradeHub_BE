@@ -1,5 +1,6 @@
 package org.saad.tradehub_be.util;
 
+import lombok.experimental.UtilityClass;
 import org.saad.tradehub_be.boundary.request.NewListingForm;
 import org.saad.tradehub_be.boundary.request.ReportListingForm;
 import org.saad.tradehub_be.boundary.request.UpdateListingForm;
@@ -8,6 +9,9 @@ import org.saad.tradehub_be.entity.data.ItemListing;
 import org.saad.tradehub_be.entity.data.ItemListingReport;
 import org.saad.tradehub_be.entity.data.actors.Seller;
 
+import java.util.Date;
+
+@UtilityClass
 public class ItemListingUtil {
 
     public static ItemListing buildItemListing(NewListingForm newListingForm, Seller seller, Category category) {
@@ -27,7 +31,6 @@ public class ItemListingUtil {
     }
 
     public static ItemListing getUpdatedItemListing(ItemListing existingListing, UpdateListingForm updateListingForm, Category category) {
-        // Update fields if present in the updateListingForm
         if (updateListingForm.getName() != null && !updateListingForm.getName().isEmpty()) {
             existingListing.setName(updateListingForm.getName());
         }
@@ -63,7 +66,14 @@ public class ItemListingUtil {
         return existingListing;
     }
 
-    public static ItemListingReport getReport(ReportListingForm reportListingForm) {
-        return ItemListingReport.builder().build();
+    public static ReportListingForm getReport(ItemListingReport itemListingReport) {
+        return ReportListingForm.builder()
+                .itemId(itemListingReport.getItemId())
+                .sellerId(itemListingReport.getSellerId())
+                .buyerReportedBy(itemListingReport.getReportedBy())
+                .timeReported(itemListingReport.getReportedAt() != null ? itemListingReport.getReportedAt() : new Date())
+                .isReviewed(Boolean.FALSE)
+                .reportType(itemListingReport.getReason())
+                .build();
     }
 }

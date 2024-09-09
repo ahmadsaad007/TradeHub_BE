@@ -16,6 +16,12 @@ public class BuyerService {
         this.buyerRepository = buyerRepository;
     }
 
+    /**
+     * This method adds the item to the purchase History of the buyer
+     *
+     * @param userId is the userId of the Buyer
+     * @param itemId is the item Id of the itemListing purchased
+     */
     public void addPurchaseOrder(String userId, String itemId) {
         Buyer buyer = buyerRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Buyer not found"));

@@ -1,6 +1,6 @@
 package org.saad.tradehub_be.boundary.controller;
 
-import org.saad.tradehub_be.boundary.request.ReportListingForm;
+import org.saad.tradehub_be.entity.data.ItemListingReport;
 import org.saad.tradehub_be.services.ReportingService;
 import org.saad.tradehub_be.util.ObjectMapperUtil;
 import org.saad.tradehub_be.entity.data.ItemListing;
@@ -30,10 +30,10 @@ public class ItemListingController {
         return itemListingService.findById(itemId);
     }
 
-    @PostMapping("/report/{itemId}")
-    public ResponseEntity<String> reportItemListing(@PathVariable String itemId, @RequestBody String report) throws Exception {
-        ReportListingForm reportListingForm = objectMapperUtil.mapRequestBody(report, ReportListingForm.class);
-        reportingService.reportListing(itemId, reportListingForm);
+    @PostMapping("/report/")
+    public ResponseEntity<String> reportItemListing(@RequestBody String report) throws Exception {
+        ItemListingReport itemListingReport = objectMapperUtil.mapRequestBody(report, ItemListingReport.class);
+        reportingService.reportListing(itemListingReport);
         return ResponseEntity.ok("Item Reported Successfully");
     }
 }

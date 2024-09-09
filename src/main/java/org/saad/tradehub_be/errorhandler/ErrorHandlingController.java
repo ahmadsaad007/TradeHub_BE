@@ -1,4 +1,4 @@
-package org.saad.tradehub_be.repository.errorhandler;
+package org.saad.tradehub_be.errorhandler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

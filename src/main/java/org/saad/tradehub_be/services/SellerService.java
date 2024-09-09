@@ -27,17 +27,27 @@ public class SellerService {
         this.categoryRepository = categoryRepository;
     }
 
+    /**
+     * This method is part of the Seller creates listing use case
+     *
+     * @param newListingForm is the data filled out with the info needed to create a new Listing
+     */
     public void createListing(NewListingForm newListingForm) {
-        // 1. Find or create the seller
+
         Seller seller = findOrCreateSeller(newListingForm.getSellerUsername());
 
-        // 2. Find the category (throw an error if not found)
         Category category = getCategory(newListingForm.getCategoryName());
 
         ItemListing itemListing = ItemListingUtil.buildItemListing(newListingForm, seller, category);
         itemListingRepository.save(itemListing);
     }
 
+    /**
+     * This method is part of the Seller updates listing use case
+     *
+     * @param itemId            is the itemId of the listing being updated
+     * @param updateListingForm is the data filled out with the info needed to create a new Listing
+     */
     public void updateExistingListing(String itemId, UpdateListingForm updateListingForm) {
         Optional<ItemListing> existingListing = itemListingRepository.findById(itemId);
 
@@ -51,11 +61,21 @@ public class SellerService {
         }
     }
 
+    /**
+     * This method is part of the Seller deletes listing use case
+     *
+     * @param itemId is the itemId of the listing being deleted
+     */
     public void deleteListing(String itemId) {
         Optional<ItemListing> existingListing = itemListingRepository.findById(itemId);
         existingListing.ifPresent(itemListingRepository::delete);
     }
 
+    /**
+     * This method is part of the Seller views all his listings use case
+     *
+     * @param username is the username of the seller
+     */
     public List<ItemListing> findItemListingBySellerInfo(String username) {
         return Optional.ofNullable(itemListingRepository.findBySellerInfoUsername(username))
                 .orElse(List.of());

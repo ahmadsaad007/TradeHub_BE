@@ -1,5 +1,7 @@
 package org.saad.tradehub_be.boundary.request;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +19,9 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
 public class ReportListingForm {
+    @Id
     private String itemId;
     private String sellerId;
     private String buyerReportedBy;

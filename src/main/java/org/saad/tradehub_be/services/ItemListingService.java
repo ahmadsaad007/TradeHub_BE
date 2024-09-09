@@ -25,13 +25,20 @@ public class ItemListingService {
      * particular item
      *
      * @param listingId the listing ID
-     * @return Optional<ItemListing> if the listing was successfully found
+     * @return List<ItemListing> if the listing was successfully found
      */
     public List<ItemListing> findById(String listingId) {
         return itemListingRepository.findById(listingId)
                 .stream().toList();
     }
 
+    /**
+     * Returns a listing based on the user provided query string.
+     * This method is called in user searches for item use case (using name of the item)
+     *
+     * @param query is a String that contains text describing the name of the item
+     * @return List<ItemListing> if the listing was successfully found or else empty list
+     */
     public List<ItemListing> searchItemListings(String query) {
         return Optional.ofNullable(itemListingRepository.findByNameContaining(query))
                 .orElse(List.of());

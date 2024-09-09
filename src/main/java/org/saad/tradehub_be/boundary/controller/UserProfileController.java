@@ -1,7 +1,8 @@
 package org.saad.tradehub_be.boundary.controller;
 
+import org.saad.tradehub_be.entity.data.Message;
 import org.saad.tradehub_be.util.ObjectMapperUtil;
-import org.saad.tradehub_be.boundary.request.Message;
+import org.saad.tradehub_be.boundary.request.MessageForm;
 import org.saad.tradehub_be.boundary.request.UserProfileUpdate;
 import org.saad.tradehub_be.services.UserControlService;
 import org.saad.tradehub_be.entity.data.actors.User;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/profile")
@@ -41,10 +44,26 @@ public class UserProfileController {
         }
     }
 
-    @PostMapping("/messaging")
+    @PostMapping("/messages/send")
     public ResponseEntity<String> sendMessage(@RequestBody String requestBody) throws Exception {
-        Message message = objectMapperUtil.mapRequestBody(requestBody, Message.class);
-        userController.sendMessage(message);
+        MessageForm messageForm = objectMapperUtil.mapRequestBody(requestBody, MessageForm.class);
+        userController.sendMessage(messageForm);
         return ResponseEntity.ok("Message Sent");
     }
+
+    @PostMapping("/messages/view")
+    public ResponseEntity<List<Message>> viewMessages(@RequestBody String requestBody) throws Exception {
+        MessageForm messageForm = objectMapperUtil.mapRequestBody(requestBody, MessageForm.class);
+
+        List<Message> messages = userController.viewMessages(messageForm.getSender(), messageForm.getReceiver());
+        return ResponseEntity.ok(messages);
+    }
+
+    @PostMapping("/messages/view/received")
+    public ResponseEntity<List<Message>> viewReceivedMessages(@RequestParam String receiver) {
+        // Call service to view received messages
+        List<Message> messages = userController.viewReceivedMessages(receiver);
+        return ResponseEntity.ok(messages);
+    }
+
 }

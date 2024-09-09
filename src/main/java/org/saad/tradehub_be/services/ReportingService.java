@@ -15,8 +15,13 @@ public class ReportingService {
         this.itemListingReportRespository = itemListingReportRespository;
     }
 
-    public void reportListing(String itemId, ReportListingForm reportListingForm) {
-        ItemListingReport itemListingReport = ItemListingUtil.getReport(reportListingForm);
-        itemListingReportRespository.save(itemListingReport);
+    /**
+     * This method is part of the Buyer reports Listing use case
+     *
+     * @param itemListingReport is the data filled out with the report info
+     */
+    public void reportListing(ItemListingReport itemListingReport) {
+        ReportListingForm reportListingForm = ItemListingUtil.getReport(itemListingReport);
+        itemListingReportRespository.save(reportListingForm);
     }
 }

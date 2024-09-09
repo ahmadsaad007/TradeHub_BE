@@ -23,6 +23,12 @@ public class OrderHistoryService {
         this.itemListingRepository = itemListingRepository;
     }
 
+    /**
+     * Returns a list of all previously purchased items
+     *
+     * @param buyerId is the userId of the buyer
+     * @return List<ItemListing> which is a List of all items previosly purchased by the buyer
+     */
     public List<ItemListing> getOrderHistory(String buyerId) {
         Buyer buyer = buyerRepository.findById(buyerId)
                 .orElseThrow(() -> new RuntimeException("Buyer not found"));
