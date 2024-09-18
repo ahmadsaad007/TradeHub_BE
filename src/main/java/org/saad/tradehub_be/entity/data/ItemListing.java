@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.saad.tradehub_be.entity.data.actors.Seller;
-import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -38,7 +36,7 @@ public class ItemListing {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", nullable = false)
-    private Seller sellerInfo;
+    private User sellerInfo;
 
     private List<String> imageUrls;
 

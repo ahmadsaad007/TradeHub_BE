@@ -1,10 +1,10 @@
 package org.saad.tradehub_be.services;
 
 import org.saad.tradehub_be.entity.data.ItemListing;
-import org.saad.tradehub_be.entity.data.actors.Buyer;
-import org.saad.tradehub_be.repository.BuyerRepository;
+import org.saad.tradehub_be.entity.data.User;
 import org.saad.tradehub_be.repository.ItemListingRepository;
 
+import org.saad.tradehub_be.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,12 +14,12 @@ import java.util.stream.Collectors;
 @Service
 public class OrderHistoryService {
 
-    private final BuyerRepository buyerRepository;
+    private final UserRepository userRepository;
 
     private final ItemListingRepository itemListingRepository;
 
-    public OrderHistoryService(BuyerRepository buyerRepository, ItemListingRepository itemListingRepository) {
-        this.buyerRepository = buyerRepository;
+    public OrderHistoryService(UserRepository userRepository, ItemListingRepository itemListingRepository) {
+        this.userRepository = userRepository;
         this.itemListingRepository = itemListingRepository;
     }
 
@@ -27,10 +27,10 @@ public class OrderHistoryService {
      * Returns a list of all previously purchased items
      *
      * @param buyerId is the userId of the buyer
-     * @return List<ItemListing> which is a List of all items previosly purchased by the buyer
+     * @return List<ItemListing> which is a List of all items previously purchased by the buyer
      */
     public List<ItemListing> getOrderHistory(String buyerId) {
-        Buyer buyer = buyerRepository.findById(buyerId)
+        User buyer = userRepository.findById(buyerId)
                 .orElseThrow(() -> new RuntimeException("Buyer not found"));
 
         List<String> purchaseIds = buyer.getPurchasedItemIds();

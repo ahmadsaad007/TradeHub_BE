@@ -1,11 +1,12 @@
-package org.saad.tradehub_be.entity.data.actors;
+package org.saad.tradehub_be.entity.data;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.experimental.SuperBuilder;
+
+import java.util.List;
 
 
 /**
@@ -44,15 +45,10 @@ public class User {
 
     protected String zipCode;
 
-    public void updateEmail(String newEmail) {
-        if (isValidEmail(newEmail)) {
-            this.email = newEmail;
-        } else {
-            throw new IllegalArgumentException("Invalid email format");
-        }
-    }
+    @OneToMany(mappedBy = "sellerInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ItemListing> listings; // Users who are sellers will have listings
 
-    private boolean isValidEmail(String email) {
-        return email != null && email.contains("@");
-    }
+    @ElementCollection
+    private List<String> purchasedItemIds; // Store the IDs of items purchased by this user
+
 }

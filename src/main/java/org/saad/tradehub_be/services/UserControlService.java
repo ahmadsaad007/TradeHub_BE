@@ -3,14 +3,13 @@ package org.saad.tradehub_be.services;
 import org.saad.tradehub_be.boundary.request.MessageForm;
 import org.saad.tradehub_be.boundary.request.UserProfileUpdate;
 import org.saad.tradehub_be.entity.data.Message;
-import org.saad.tradehub_be.entity.data.actors.User;
+import org.saad.tradehub_be.entity.data.User;
 import org.saad.tradehub_be.repository.MessageRepository;
 import org.saad.tradehub_be.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 

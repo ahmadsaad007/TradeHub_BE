@@ -4,10 +4,10 @@ import org.saad.tradehub_be.boundary.request.NewListingForm;
 import org.saad.tradehub_be.boundary.request.UpdateListingForm;
 import org.saad.tradehub_be.entity.data.Category;
 import org.saad.tradehub_be.entity.data.ItemListing;
-import org.saad.tradehub_be.entity.data.actors.Seller;
+import org.saad.tradehub_be.entity.data.User;
 import org.saad.tradehub_be.repository.CategoryRepository;
 import org.saad.tradehub_be.repository.ItemListingRepository;
-import org.saad.tradehub_be.repository.SellerRepository;
+import org.saad.tradehub_be.repository.UserRepository;
 import org.saad.tradehub_be.util.ItemListingUtil;
 import org.springframework.stereotype.Service;
 
@@ -18,13 +18,13 @@ import java.util.Optional;
 public class SellerService {
 
     private final ItemListingRepository itemListingRepository;
-    private final SellerRepository sellerRepository;
     private final CategoryRepository categoryRepository;
+    private final UserRepository userRepository;
 
-    public SellerService(ItemListingRepository itemListingRepository, SellerRepository sellerRepository, CategoryRepository categoryRepository) {
+    public SellerService(ItemListingRepository itemListingRepository, CategoryRepository categoryRepository, UserRepository userRepository) {
         this.itemListingRepository = itemListingRepository;
-        this.sellerRepository = sellerRepository;
         this.categoryRepository = categoryRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -33,13 +33,12 @@ public class SellerService {
      * @param newListingForm is the data filled out with the info needed to create a new Listing
      */
     public void createListing(NewListingForm newListingForm) {
-
-        Seller seller = findOrCreateSeller(newListingForm.getSellerUsername());
-
+        User user = findOrPromoteToSeller(newListingForm.getSellerUsername());
         Category category = getCategory(newListingForm.getCategoryName());
 
-        ItemListing itemListing = ItemListingUtil.buildItemListing(newListingForm, seller, category);
+        ItemListing itemListing = ItemListingUtil.buildItemListing(newListingForm, user, category);
         itemListingRepository.save(itemListing);
+
     }
 
     /**
@@ -81,14 +80,16 @@ public class SellerService {
                 .orElse(List.of());
     }
 
-    private Seller findOrCreateSeller(String sellerUsername) {
-        return sellerRepository.findByUsername(sellerUsername).orElseGet(() -> {
-            Seller newSeller = new Seller();
-            newSeller.setUsername(sellerUsername);
-            newSeller.setEmail("");
-            newSeller.setAddress("Unknown Address");
-            return sellerRepository.save(newSeller);
-        });
+    private User findOrPromoteToSeller(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (!user.isSeller()) {
+            user.setSeller(true);
+            userRepository.save(user);
+        }
+
+        return user;
     }
 
     private Category getCategory(String categoryName) {

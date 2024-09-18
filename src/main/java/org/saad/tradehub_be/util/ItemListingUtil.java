@@ -7,20 +7,20 @@ import org.saad.tradehub_be.boundary.request.UpdateListingForm;
 import org.saad.tradehub_be.entity.data.Category;
 import org.saad.tradehub_be.entity.data.ItemListing;
 import org.saad.tradehub_be.entity.data.ItemListingReport;
-import org.saad.tradehub_be.entity.data.actors.Seller;
+import org.saad.tradehub_be.entity.data.User;
 
 import java.util.Date;
 
 @UtilityClass
 public class ItemListingUtil {
 
-    public static ItemListing buildItemListing(NewListingForm newListingForm, Seller seller, Category category) {
+    public static ItemListing buildItemListing(NewListingForm newListingForm, User user, Category category) {
         return ItemListing.builder()
                 .itemId(newListingForm.getListingId())
                 .price(newListingForm.getPrice())
                 .listingAddress(newListingForm.getListingAddress())
                 .zip(newListingForm.getZip())
-                .sellerInfo(seller)
+                .sellerInfo(user)
                 .isAvailable(Boolean.TRUE)
                 .description(newListingForm.getDescription())
                 .createdAt(newListingForm.getCreatedAt())

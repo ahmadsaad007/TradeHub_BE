@@ -5,7 +5,7 @@ import org.saad.tradehub_be.util.ObjectMapperUtil;
 import org.saad.tradehub_be.boundary.request.MessageForm;
 import org.saad.tradehub_be.boundary.request.UserProfileUpdate;
 import org.saad.tradehub_be.services.UserControlService;
-import org.saad.tradehub_be.entity.data.actors.User;
+import org.saad.tradehub_be.entity.data.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
