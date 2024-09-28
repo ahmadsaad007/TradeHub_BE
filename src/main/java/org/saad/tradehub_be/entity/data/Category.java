@@ -1,7 +1,11 @@
-package org.saad.tradehub_be.entity.itemcard;
+package org.saad.tradehub_be.entity.data;
 
-import lombok.*;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * The Category class represents the category under which an item or service can be listed.
@@ -12,7 +16,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
 public class Category {
+    @Id
     private String categoryId;
     private String name;
     private String description;
