@@ -21,6 +21,10 @@ public class ReportingService {
      * @param itemListingReport is the data filled out with the report info
      */
     public void reportListing(ItemListingReport itemListingReport) {
+        if (itemListingReport == null) {
+            throw new IllegalArgumentException("ItemListingReport cannot be null");
+        }
+
         ReportListingForm reportListingForm = ItemListingUtil.getReport(itemListingReport);
         itemListingReportRespository.save(reportListingForm);
     }

@@ -67,8 +67,14 @@ public class SellerService {
      */
     public void deleteListing(String itemId) {
         Optional<ItemListing> existingListing = itemListingRepository.findById(itemId);
-        existingListing.ifPresent(itemListingRepository::delete);
+
+        if (existingListing.isPresent()) {
+            itemListingRepository.delete(existingListing.get());
+        } else {
+            throw new RuntimeException("Listing with ID " + itemId + " not found");
+        }
     }
+
 
     /**
      * This method is part of the Seller views all his listings use case

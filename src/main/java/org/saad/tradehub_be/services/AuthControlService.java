@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 /**
- * The UserAuthentication class is responsbile for performing Signup and login tasks
+ * The UserAuthentication class is responsible for performing Signup and login tasks
  */
 @Service
 public class AuthControlService {
