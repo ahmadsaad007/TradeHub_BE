@@ -7,9 +7,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.saad.tradehub_be.boundary.request.NewListingForm;
 import org.saad.tradehub_be.boundary.request.UpdateListingForm;
-import org.saad.tradehub_be.entity.data.Category;
-import org.saad.tradehub_be.entity.data.ItemListing;
-import org.saad.tradehub_be.entity.data.User;
+import org.saad.tradehub_be.data.Category;
+import org.saad.tradehub_be.data.ItemListing;
+import org.saad.tradehub_be.data.User;
 import org.saad.tradehub_be.repository.CategoryRepository;
 import org.saad.tradehub_be.repository.ItemListingRepository;
 import org.saad.tradehub_be.repository.UserRepository;
@@ -96,7 +96,6 @@ public class SellerServiceTest {
         Category mockCategory = new Category();
         when(itemListingRepository.findById("item123")).thenReturn(Optional.of(mockListing));
         when(categoryRepository.findByName("Home Appliances")).thenReturn(Optional.of(mockCategory));
-
         mockStatic(ItemListingUtil.class);
         when(ItemListingUtil.getUpdatedItemListing(mockListing, updateListingForm, mockCategory))
                 .thenAnswer(invocation -> {

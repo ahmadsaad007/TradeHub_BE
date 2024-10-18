@@ -1,4 +1,4 @@
-package org.saad.tradehub_be.entity.data;
+package org.saad.tradehub_be.data;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,6 +27,8 @@ public class User {
 
     @Id
     protected String userId;
+
+    protected String fullname;
 
     protected String password;
 

@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.saad.tradehub_be.entity.data.ItemListing;
-import org.saad.tradehub_be.entity.data.User;
+import org.saad.tradehub_be.data.ItemListing;
+import org.saad.tradehub_be.data.User;
 import org.saad.tradehub_be.repository.ItemListingRepository;
 import org.saad.tradehub_be.repository.UserRepository;
 

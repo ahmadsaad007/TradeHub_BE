@@ -5,7 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.saad.tradehub_be.entity.data.ItemListingReport;
+import org.saad.tradehub_be.data.ItemListingReport;
 import org.saad.tradehub_be.repository.ItemListingReportRespository;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
