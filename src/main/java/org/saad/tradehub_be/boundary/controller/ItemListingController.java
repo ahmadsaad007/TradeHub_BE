@@ -1,9 +1,9 @@
 package org.saad.tradehub_be.boundary.controller;
 
-import org.saad.tradehub_be.entity.data.ItemListingReport;
+import org.saad.tradehub_be.data.ItemListingReport;
 import org.saad.tradehub_be.services.ReportingService;
 import org.saad.tradehub_be.util.ObjectMapperUtil;
-import org.saad.tradehub_be.entity.data.ItemListing;
+import org.saad.tradehub_be.data.ItemListing;
 import org.saad.tradehub_be.services.ItemListingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,13 +25,19 @@ public class ItemListingController {
     @Autowired
     private ObjectMapperUtil objectMapperUtil;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{itemId}")
-    public List<ItemListing> viewItemListing(@PathVariable String itemId) {
-        return itemListingService.findById(itemId);
+    public ResponseEntity<Object> viewItemListing(@PathVariable String itemId) {
+        try {
+            return ResponseEntity.ok(itemListingService.findById(itemId));
+        } catch (Exception e) {
+            return new ResponseEntity<>("Item Search Failed " + e.getMessage(), HttpStatus.BAD_GATEWAY);
+        }
     }
 
-    @PostMapping("/report/")
-    public ResponseEntity<String> reportItemListing(@RequestBody String report) throws Exception {
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/report")
+    public ResponseEntity<Object> reportItemListing(@RequestBody String report) {
         try {
             ItemListingReport itemListingReport = objectMapperUtil.mapRequestBody(report, ItemListingReport.class);
             reportingService.reportListing(itemListingReport);

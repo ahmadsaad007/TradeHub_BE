@@ -1,7 +1,7 @@
 package org.saad.tradehub_be.repository;
 
 
-import org.saad.tradehub_be.entity.data.Message;
+import org.saad.tradehub_be.data.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

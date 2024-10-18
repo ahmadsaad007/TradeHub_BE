@@ -1,6 +1,6 @@
 package org.saad.tradehub_be.services;
 
-import org.saad.tradehub_be.entity.data.User;
+import org.saad.tradehub_be.data.User;
 import org.saad.tradehub_be.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +36,7 @@ public class BuyerService {
             user.setPurchasedItemIds(purchasedItemIds);
             userRepository.save(user);
         } else {
-            throw new RuntimeException("Item is already in the purchase history.");
+            throw new RuntimeException("Item is already in purchase history.");
         }
     }
 }

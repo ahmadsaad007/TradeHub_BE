@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.saad.tradehub_be.boundary.request.LoginRequest;
 import org.saad.tradehub_be.boundary.request.SignUpRequest;
-import org.saad.tradehub_be.entity.data.User;
+import org.saad.tradehub_be.data.User;
 import org.saad.tradehub_be.repository.UserRepository;
 
 import java.util.Optional;
@@ -36,7 +36,6 @@ public class AuthControlServiceTest {
         when(userRepository.findByUsername("testuser")).thenReturn(Optional.of(mockUser));
 
         boolean result = authControlService.loginUser(loginRequest);
-
         assertTrue(result);
     }
 
@@ -50,9 +49,7 @@ public class AuthControlServiceTest {
         mockUser.setPassword("password");
 
         when(userRepository.findByUsername("testuser")).thenReturn(Optional.of(mockUser));
-
         boolean result = authControlService.loginUser(loginRequest);
-
         assertFalse(result);
     }
 

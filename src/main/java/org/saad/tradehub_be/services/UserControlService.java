@@ -2,14 +2,16 @@ package org.saad.tradehub_be.services;
 
 import org.saad.tradehub_be.boundary.request.MessageForm;
 import org.saad.tradehub_be.boundary.request.UserProfileUpdate;
-import org.saad.tradehub_be.entity.data.Message;
-import org.saad.tradehub_be.entity.data.User;
+import org.saad.tradehub_be.data.Message;
+import org.saad.tradehub_be.data.User;
 import org.saad.tradehub_be.repository.MessageRepository;
 import org.saad.tradehub_be.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +19,7 @@ import java.util.UUID;
 public class UserControlService {
 
     private final UserRepository userRepository;
-    private final MessageRepository messageRepository; // Assuming you have a MessageRepository to handle message storage
+    private final MessageRepository messageRepository;
 
     public UserControlService(UserRepository userRepository, MessageRepository messageRepository) {
         this.userRepository = userRepository;
@@ -27,14 +29,14 @@ public class UserControlService {
     /**
      * Updates the profile of the user based on the provided UserProfileUpdate object.
      *
-     * @param userId            the ID of the user to update
+     * @param username            the ID of the user to update
      * @param userProfileUpdate the object containing the updated profile information
      */
     @Transactional
-    public void updateProfile(String userId, UserProfileUpdate userProfileUpdate) {
+    public void updateProfile(String username, UserProfileUpdate userProfileUpdate) {
         // Fetch the user by userId
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User with ID " + userId + " not found"));
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User with username " + username + " not found"));
 
         // Update user profile fields if provided in the UserProfileUpdate object
         if (userProfileUpdate.getEmail() != null && !userProfileUpdate.getEmail().isEmpty()) {
@@ -56,11 +58,11 @@ public class UserControlService {
     /**
      * Retrieves the profile of a user based on the provided userId.
      *
-     * @param userId the ID of the user to fetch
+     * @param username the ID of the user to fetch
      * @return the User object representing the user's profile
      */
-    public User getUserProfile(String userId) {
-        return userRepository.findById(userId)
+    public User getUserProfile(String username) {
+        return userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
@@ -92,7 +94,19 @@ public class UserControlService {
      * @return List of messages exchanged between the sender and receiver
      */
     public List<Message> viewMessages(String sender, String receiver) {
-        return messageRepository.findBySenderAndReceiver(sender, receiver);
+        List<Message> messagesSent = messageRepository.findBySenderAndReceiver(sender, receiver);
+        List<Message> messagesReceived = messageRepository.findBySenderAndReceiver(receiver, sender);
+        return buildConversation(messagesSent, messagesReceived);
+    }
+
+    private List<Message> buildConversation(List<Message> messagesSent, List<Message> messagesReceived) {
+        List<Message> conversation = new ArrayList<>();
+        conversation.addAll(messagesSent);
+        conversation.addAll(messagesReceived);
+
+        // Sort the combined list by timeStamp so the messages appear in chronological order
+        conversation.sort(Comparator.comparing(Message::getTimeStamp));
+        return conversation;
     }
 
     /**

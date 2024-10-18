@@ -1,6 +1,6 @@
 package org.saad.tradehub_be.repository;
 
-import org.saad.tradehub_be.entity.data.User;
+import org.saad.tradehub_be.data.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

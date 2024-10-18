@@ -1,4 +1,4 @@
-package org.saad.tradehub_be.entity.data;
+package org.saad.tradehub_be.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

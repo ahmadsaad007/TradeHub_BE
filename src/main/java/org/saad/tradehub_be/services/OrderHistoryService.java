@@ -1,7 +1,7 @@
 package org.saad.tradehub_be.services;
 
-import org.saad.tradehub_be.entity.data.ItemListing;
-import org.saad.tradehub_be.entity.data.User;
+import org.saad.tradehub_be.data.ItemListing;
+import org.saad.tradehub_be.data.User;
 import org.saad.tradehub_be.repository.ItemListingRepository;
 
 import org.saad.tradehub_be.repository.UserRepository;

@@ -8,12 +8,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.saad.tradehub_be.boundary.request.NewListingForm;
 import org.saad.tradehub_be.boundary.request.ReportListingForm;
 import org.saad.tradehub_be.boundary.request.UpdateListingForm;
-import org.saad.tradehub_be.entity.data.Category;
-import org.saad.tradehub_be.entity.data.ItemListing;
-import org.saad.tradehub_be.entity.data.ItemListingReport;
-import org.saad.tradehub_be.entity.data.User;
+import org.saad.tradehub_be.data.Category;
+import org.saad.tradehub_be.data.ItemListing;
+import org.saad.tradehub_be.data.ItemListingReport;
+import org.saad.tradehub_be.data.User;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 

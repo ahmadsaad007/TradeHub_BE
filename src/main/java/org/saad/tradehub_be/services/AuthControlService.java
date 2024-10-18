@@ -3,7 +3,7 @@ package org.saad.tradehub_be.services;
 import org.saad.tradehub_be.boundary.request.LoginRequest;
 import org.saad.tradehub_be.boundary.request.SignUpRequest;
 import org.saad.tradehub_be.repository.UserRepository;
-import org.saad.tradehub_be.entity.data.User;
+import org.saad.tradehub_be.data.User;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;

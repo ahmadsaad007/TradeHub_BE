@@ -2,14 +2,15 @@ package org.saad.tradehub_be.services;
 
 import org.saad.tradehub_be.boundary.request.NewListingForm;
 import org.saad.tradehub_be.boundary.request.UpdateListingForm;
-import org.saad.tradehub_be.entity.data.Category;
-import org.saad.tradehub_be.entity.data.ItemListing;
-import org.saad.tradehub_be.entity.data.User;
+import org.saad.tradehub_be.data.Category;
+import org.saad.tradehub_be.data.ItemListing;
+import org.saad.tradehub_be.data.User;
 import org.saad.tradehub_be.repository.CategoryRepository;
 import org.saad.tradehub_be.repository.ItemListingRepository;
 import org.saad.tradehub_be.repository.UserRepository;
 import org.saad.tradehub_be.util.ItemListingUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +33,7 @@ public class SellerService {
      *
      * @param newListingForm is the data filled out with the info needed to create a new Listing
      */
+    @Transactional
     public void createListing(NewListingForm newListingForm) {
         User user = findOrPromoteToSeller(newListingForm.getSellerUsername());
         Category category = getCategory(newListingForm.getCategoryName());
@@ -47,6 +49,7 @@ public class SellerService {
      * @param itemId            is the itemId of the listing being updated
      * @param updateListingForm is the data filled out with the info needed to create a new Listing
      */
+    @Transactional
     public void updateExistingListing(String itemId, UpdateListingForm updateListingForm) {
         Optional<ItemListing> existingListing = itemListingRepository.findById(itemId);
 
@@ -65,6 +68,7 @@ public class SellerService {
      *
      * @param itemId is the itemId of the listing being deleted
      */
+    @Transactional
     public void deleteListing(String itemId) {
         Optional<ItemListing> existingListing = itemListingRepository.findById(itemId);
 

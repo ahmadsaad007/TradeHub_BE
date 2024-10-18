@@ -1,7 +1,7 @@
 package org.saad.tradehub_be.services;
 
 import org.saad.tradehub_be.boundary.request.ReportListingForm;
-import org.saad.tradehub_be.entity.data.ItemListingReport;
+import org.saad.tradehub_be.data.ItemListingReport;
 import org.saad.tradehub_be.repository.ItemListingReportRespository;
 import org.saad.tradehub_be.util.ItemListingUtil;
 import org.springframework.stereotype.Service;
